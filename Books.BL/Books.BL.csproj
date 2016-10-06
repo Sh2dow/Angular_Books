@@ -54,10 +54,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Books.DL\Books.DL.csproj">
       <Project>{28fa5a10-5b43-4090-8519-a9c6c80ad2b6}</Project>
       <Name>Books.DL</Name>
@@ -66,6 +62,9 @@
       <Project>{ff280fec-7ae8-4546-84fe-9bc1ae2f5659}</Project>
       <Name>Books.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
