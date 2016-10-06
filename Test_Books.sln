@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Web", "Books\Books.Web.csproj", "{0563925A-B8AD-4496-8897-9DFDDCEE632C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Web", "Books.Web\Books.Web.csproj", "{0563925A-B8AD-4496-8897-9DFDDCEE632C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{28FA5A10-5B43-4090-8519-A9C6C80AD2B6} = {28FA5A10-5B43-4090-8519-A9C6C80AD2B6}
 		{37D1CA7F-D9AD-4FA0-9ED3-A67B6E292B09} = {37D1CA7F-D9AD-4FA0-9ED3-A67B6E292B09}
