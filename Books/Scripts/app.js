@@ -38,7 +38,8 @@
                 url: booksUri,
                 columns: [{
                     field: 'Id',
-                    title: 'id'
+                    title: 'id',
+                    searchable: false
                 }, {
                     field: 'Author',
                     title: 'Author Name'
@@ -47,17 +48,29 @@
                     title: 'Title'
                 }, {
                     field: 'Year',
-                    title: 'Year'
+                    title: 'Year',
+                    searchable: false
                 }, {
                     field: 'Genre',
-                    title: 'Genre'
+                    title: 'Genre',
+                    searchable: false
                 }, {
                     field: 'Price',
-                    title: 'Price'
+                    title: 'Price',
+                    searchable: false
                 }],
-                //showRefresh: true,
-                silent: true,
                 search: true,
+                pagination: true,
+                pageSize: 10
+            });
+
+            $('.search').bind('keypress', function (event) {
+                var regex = new RegExp("^[a-zA-Zа-яА-Я]");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
             });
         });
     }
