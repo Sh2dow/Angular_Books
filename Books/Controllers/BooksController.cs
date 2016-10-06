@@ -35,7 +35,7 @@ namespace Books.Controllers
         [ResponseType(typeof(BookDetailDTO))]
         public async Task<IHttpActionResult> GetBook(int id)
         {
-            var book = await db.Books.Include(b => b.Author).Select(b =>
+            var book = await db.Books.Select(b =>
                 new BookDetailDTO()
                 {
                     Id = b.Id,

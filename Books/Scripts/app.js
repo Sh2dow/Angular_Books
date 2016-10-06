@@ -32,6 +32,25 @@
         });
     }
 
+    function jqtable() {
+        ajaxHelper(booksUri, 'GET').done(function () {
+            $('#table').bootstrapTable({
+                url: booksUri,
+                columns: [{
+                    field: 'Author',
+                    title: 'Author Name'
+                }, {
+                    field: 'Title',
+                    title: 'Title'
+                }],
+                //showRefresh: true,
+                silent: true,
+                search: true,
+            });
+        });
+    }
+
+
     self.getBookDetail = function (item) {
         ajaxHelper(booksUri + item.Id, 'GET').done(function (data) {
             self.detail(data);
@@ -50,11 +69,12 @@
 
         ajaxHelper(booksUri, 'POST', book).done(function (item) {
             self.books.push(item);
+            $('#table').bootstrapTable('refresh');
         });
     }
 
     // Fetch the initial data.
-    getAllBooks();
+    jqtable();
 };
 
 ko.applyBindings(new ViewModel());

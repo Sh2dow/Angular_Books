@@ -2,15 +2,26 @@
 
 namespace Books.Models
 {
-    public class Book
+    public class BookDTO
     {
         public int Id { get; set; }
-        [Required]
-        public string Title { get; set; }
-        [Required]
         public string Author { get; set; }
+        public string Title { get; set; }
+        
+    }
+
+    public class BookDetailDTO : BookDTO
+    {
         public int Year { get; set; }
         public decimal Price { get; set; }
         public string Genre { get; set; }
+    }
+
+    public class Book : BookDetailDTO
+    {
+        [Required]
+        public new string Author { get; set; }
+        [Required]
+        public new string Title { get; set; }
     }
 }

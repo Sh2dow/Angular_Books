@@ -1,6 +1,6 @@
 Books
 ===========
-ASP.NET + Angular
+ASP.NET + Jquery + BootstrapTables
 
 Requirements:
 

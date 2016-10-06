@@ -20,7 +20,7 @@ namespace Books.Models
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
-        public System.Data.Entity.DbSet<Books.Models.Book> Books { get; set; }
+        public DbSet<Books.Models.Book> Books { get; set; }
     
     }
 }

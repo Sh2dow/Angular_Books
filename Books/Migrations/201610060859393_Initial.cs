@@ -12,8 +12,8 @@ namespace Books.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false),
                         Author = c.String(nullable: false),
+                        Title = c.String(nullable: false),
                         Year = c.Int(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Genre = c.String(),
