@@ -22,12 +22,14 @@ namespace Books
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-table.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                          "~/Scripts/knockout-{version}.js",
                          "~/Scripts/app.js",
-                         "~/Scripts/bootstrap-table.js"));            
+                         "~/Scripts/bootstrap-table.js",
+                         "~/bootstrap-table-select2-filter.js"));            
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

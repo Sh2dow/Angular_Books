@@ -18,25 +18,27 @@ namespace Books.Controllers
         private BookServiceContext db = new BookServiceContext();
 
         // GET: api/Books
-        public IQueryable<BookDTO> GetBooks()
+        public IEnumerable<Book> GetBooks()
         {
             var books = from b in db.Books
-                        select new BookDTO()
+                        select new Book()
                         {
                             Id = b.Id,
                             Title = b.Title,
-                            Author = b.Author
+                            Year = b.Year,
+                            Price = b.Price,
+                            Author = b.Author,
+                            Genre = b.Genre
                         };
 
-            return books;
+            return db.Books;
         }
 
         // GET: api/Books/5
-        [ResponseType(typeof(BookDetailDTO))]
         public async Task<IHttpActionResult> GetBook(int id)
         {
             var book = await db.Books.Select(b =>
-                new BookDetailDTO()
+                new Book()
                 {
                     Id = b.Id,
                     Title = b.Title,
@@ -100,14 +102,17 @@ namespace Books.Controllers
             db.Books.Add(book);
             await db.SaveChangesAsync();
 
-            var dto = new BookDTO()
+            var b = new Book()
             {
                 Id = book.Id,
                 Title = book.Title,
-                Author = book.Author
+                Year = book.Year,
+                Price = book.Price,
+                Author = book.Author,
+                Genre = book.Genre
             };
 
-            return CreatedAtRoute("DefaultApi", new { id = book.Id }, dto);
+            return CreatedAtRoute("DefaultApi", new { id = book.Id }, b);
         }
 
         // DELETE: api/Books/5

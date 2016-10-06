@@ -37,11 +37,23 @@
             $('#table').bootstrapTable({
                 url: booksUri,
                 columns: [{
+                    field: 'Id',
+                    title: 'id'
+                }, {
                     field: 'Author',
                     title: 'Author Name'
                 }, {
                     field: 'Title',
                     title: 'Title'
+                }, {
+                    field: 'Year',
+                    title: 'Year'
+                }, {
+                    field: 'Genre',
+                    title: 'Genre'
+                }, {
+                    field: 'Price',
+                    title: 'Price'
                 }],
                 //showRefresh: true,
                 silent: true,

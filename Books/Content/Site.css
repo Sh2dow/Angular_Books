@@ -9,6 +9,12 @@
     padding-right: 15px;
 }
 
+.jumbotron
+{
+    margin: 10px;
+    padding: 10px
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
