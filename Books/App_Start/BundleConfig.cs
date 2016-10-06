@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace Books
+namespace Books.Web
 {
     public class BundleConfig
     {

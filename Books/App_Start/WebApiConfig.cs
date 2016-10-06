@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 
-namespace Books
+namespace Books.Web
 {
     public static class WebApiConfig
     {

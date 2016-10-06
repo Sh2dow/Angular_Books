@@ -2,6 +2,8 @@
 using Books.BL;
 using Books.DL;
 using System.Threading.Tasks;
+using System.Web.Http.Description;
+using Books.Models;
 
 namespace Books.Controllers
 {
@@ -22,6 +24,19 @@ namespace Books.Controllers
         {
             var books = _bookService.GetBooks();
             return Ok(books);
+        }
+
+        // POST: api/Books
+        [ResponseType(typeof(Book))]
+        public IHttpActionResult PostBook(Book book)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _bookService.AddBook(book);
+            return Ok(book);
         }
     }
 }

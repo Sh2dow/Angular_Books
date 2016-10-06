@@ -32,7 +32,7 @@
         });
     }
 
-    function jqtable() {
+    function init_jqtable() {
         ajaxHelper(booksUri, 'GET').done(function () {
             $('#table').bootstrapTable({
                 url: booksUri,
@@ -100,7 +100,7 @@
     }
 
     // Fetch the initial data.
-    jqtable();
+    init_jqtable();
 };
 
 ko.applyBindings(new ViewModel());
