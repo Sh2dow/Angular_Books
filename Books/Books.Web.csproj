@@ -168,15 +168,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610061621506_Initial.cs" />
-    <Compile Include="Migrations\201610061621506_Initial.Designer.cs">
-      <DependentUpon>201610061621506_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Book.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Models\BookServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,11 +212,6 @@
     <None Include="Properties\PublishProfiles\BookService.pubxml" />
     <None Include="Properties\PublishProfiles\bookservice2.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <None Include="Scripts\jquery-3.1.0-vsdoc.js" />
-    <Content Include="Scripts\jquery-3.1.0.js" />
-    <Content Include="Scripts\jquery-3.1.0.min.js" />
-    <Content Include="Scripts\jquery-3.1.0.slim.js" />
-    <Content Include="Scripts\jquery-3.1.0.slim.min.js" />
     <Content Include="Scripts\bootstrap-table.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
@@ -254,16 +240,23 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Scripts\jquery-3.1.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.0.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610061621506_Initial.resx">
-      <DependentUpon>201610061621506_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Books.BL\Books.BL.csproj">
+      <Project>{37D1CA7F-D9AD-4FA0-9ED3-A67B6E292B09}</Project>
+      <Name>Books.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Books.DL\Books.DL.csproj">
+      <Project>{28FA5A10-5B43-4090-8519-A9C6C80AD2B6}</Project>
+      <Name>Books.DL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Books.Models\Books.Models.csproj">
+      <Project>{ff280fec-7ae8-4546-84fe-9bc1ae2f5659}</Project>
+      <Name>Books.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

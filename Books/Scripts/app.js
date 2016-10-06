@@ -61,7 +61,8 @@
                 }],
                 search: true,
                 pagination: true,
-                pageSize: 10
+                pageSize: 15,
+                showRefresh: true
             });
 
             $('.search').bind('keypress', function (event) {
