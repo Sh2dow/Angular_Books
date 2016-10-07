@@ -1,6 +1,6 @@
 Books
 ===========
-ASP.NET + Jquery + BootstrapTables
+ASP.NET Web Api 2 + Jquery + BootstrapTables
 
 Requirements:
 
@@ -13,5 +13,4 @@ To run the sample locally from Visual Studio:
 - Open the Package Manager Console (Tools > NuGet Package Manager > Package Manager Console)
 - In the Package Manager Console window, enter the following command: `Update-Database`
 
-
-
+Unit tests are in Books.UnitTestProject.
