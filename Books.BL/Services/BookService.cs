@@ -1,6 +1,7 @@
 ﻿using Books.Models;
 using Books.DL;
 using System.Collections.Generic;
+using System;
 
 namespace Books.BL
 {
@@ -40,6 +41,11 @@ namespace Books.BL
         public Book GetBook(int id)
         {
             return repo.GetBook(id);
+        }
+
+        public void Dispose()
+        {
+            repo.Dispose();
         }
     }
 }

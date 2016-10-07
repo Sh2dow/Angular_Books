@@ -1,9 +1,10 @@
 ﻿using Books.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Books
 {
-    internal interface IBookService
+    internal interface IBookService : IDisposable
     {
         void AddBook(Book book);
         //void UpdateBook(Book book);

@@ -4,13 +4,12 @@ using Books.DL;
 using System.Threading.Tasks;
 using System.Web.Http.Description;
 using Books.Models;
+using System.Collections.Generic;
 
 namespace Books.Controllers
 {
     public class BooksController : ApiController
     {
-        private BookContext db = new BookContext();
-
         // GET: api/Books
 
         private BookService _bookService;
@@ -20,10 +19,14 @@ namespace Books.Controllers
             _bookService = new BookService();
         }
 
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            var books = _bookService.GetBooks();
-            return Ok(books);
+            return Ok(await Task.FromResult(_bookService.GetBooks()));
+        }
+
+        public async Task<IHttpActionResult> GetBook(int id)
+        {
+            return Ok(await Task.FromResult(_bookService.GetBook(id)));
         }
 
         // POST: api/Books

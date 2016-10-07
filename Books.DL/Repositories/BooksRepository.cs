@@ -1,11 +1,12 @@
 ﻿using Books.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
 namespace Books.DL
 {
-    public class BooksRepository
+    public class BooksRepository : IDisposable
     {
         private BookContext ctx;
 
@@ -49,6 +50,11 @@ namespace Books.DL
         public void Save()
         {
             ctx.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            ctx.Dispose();
         }
     }
 }
