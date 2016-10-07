@@ -12,6 +12,7 @@ using Books.DL;
 using Books.BL;
 using Books.Web;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Books.UnitTests
 {
@@ -21,21 +22,21 @@ namespace Books.UnitTests
         [TestInitialize]
         public void TestInitialize()
         {
-            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Books.Web\App_Data"));
-            var p = AppDomain.CurrentDomain.GetData("DataDirectory");
-            Debug.WriteLine(p);
-            // rest of initialize implementation ...
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + "../../../../Books.Web/App_Data"));
         }
 
         [TestMethod]
         public void GetShouldReturnAllBooks()
         {
+             // Arrange
             var controller = new BooksController();
+            // Act
             var actionResult = controller.Get();
+            // Assert
             var response = actionResult as OkNegotiatedContentResult<IEnumerable<Book>>;
             Assert.IsNotNull(response);
             var books = response.Content;
-            Assert.AreEqual(1, books);
+            Assert.AreEqual(4, books.Count());
         }
 
         [TestMethod]
@@ -49,27 +50,13 @@ namespace Books.UnitTests
         }
 
         [TestMethod]
-        public void PutShouldUpdateBook()
-        {
-            var controller = new BooksController();
-            var book = new Book { Id = 1, Title = "asp.net webapi2", Author = "Jane Austen" };
-            var actionResult = controller.Put(book.Id, book);
-            var response = actionResult as OkNegotiatedContentResult<Book>;
-            Assert.IsNotNull(response);
-            var newBook = response.Content;
-            Assert.AreEqual(1, newBook.Id);
-            Assert.AreEqual("asp.net webapi2", newBook.Title);
-            Assert.AreEqual("Jane Austen", newBook.Author);
-        }
-
-        [TestMethod]
         public void PostShouldAddBook()
         {
             var controller = new BooksController();
             var actionResult = controller.Post(new Book
             {
-                Title = "asp.net webapi2",
-                Author = "Jane Austen"
+                Title = "C# 5.0 in a Nutshell",
+                Author = "Joseph Albahari"
             });
             var response = actionResult as CreatedAtRouteNegotiatedContentResult<Book>;
             Assert.IsNotNull(response);
@@ -77,46 +64,18 @@ namespace Books.UnitTests
             Assert.AreEqual(response.Content.Id, response.RouteValues["Id"]);
         }
 
-        public List<Book> GetTestBooks()
+        [TestMethod]
+        public void PutShouldUpdateBook()
         {
-            var testBooks = new List<Book>();
-            testBooks.Add(new Book
-            {
-                Id = 1,
-                Title = "Pride and Prejudice",
-                Year = 1813,
-                Author = "Jane Austen",
-                Price = 9.99M,
-                Genre = "Commedy of manners"
-            });
-            testBooks.Add(new Book
-            {
-                Id = 2,
-                Title = "Northanger Abbey",
-                Year = 1817,
-                Author = "Jane Austen",
-                Price = 12.95M,
-                Genre = "Gothic parody"
-            });
-            testBooks.Add(new Book
-            {
-                Id = 3,
-                Title = "David Copperfield",
-                Year = 1850,
-                Author = "Charles Dickens",
-                Price = 15,
-            });
-            testBooks.Add(new Book
-            {
-                Id = 4,
-                Title = "Don Quixote",
-                Year = 1617,
-                Author = "Miguel de Cervantes",
-                Price = 8.95M,
-                Genre = "Picaresque"
-            });
-            return testBooks;
+            var controller = new BooksController();
+            var book = new Book { Id = 5, Title = "CLR via C#", Author = "Jeffrey Richter" };
+            var actionResult = controller.Put(book.Id, book);
+            var response = actionResult as OkNegotiatedContentResult<Book>;
+            Assert.IsNotNull(response);
+            var newBook = response.Content;
+            Assert.AreEqual(5, newBook.Id);
+            Assert.AreEqual("CLR via C#", newBook.Title);
+            Assert.AreEqual("Jeffrey Richter", newBook.Author);
         }
-
     }
 }

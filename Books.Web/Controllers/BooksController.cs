@@ -23,7 +23,7 @@ namespace Books.Controllers
         // GET api/books
         public IHttpActionResult Get()
         {
-            return Ok(_bookService.GetBooks().AsEnumerable());
+            return  Ok(_bookService.GetBooks().AsEnumerable());
         }
 
         // GET api/books/1
