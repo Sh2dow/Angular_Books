@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 namespace Books
 {
-    internal interface IBookService : IDisposable
+    public interface IBooksService : IDisposable
     {
-        void AddBook(Book book);
+        Book GetBook(int id);
+        Book AddBook(Book book);
+        Book UpdateBook(Book book);
         //void UpdateBook(Book book);
         void RemoveBook(Book book);
         IEnumerable<Book> GetBooks();
-        Book GetBook(int id);
     }
 }

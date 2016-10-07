@@ -1,10 +1,11 @@
 ﻿using System.Web.Http;
-using Books.BL;
-using Books.DL;
 using System.Threading.Tasks;
 using System.Web.Http.Description;
+using Books.BL;
+using Books.DL;
 using Books.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Books.Controllers
 {
@@ -12,34 +13,54 @@ namespace Books.Controllers
     {
         // GET: api/Books
 
-        private BookService _bookService;
+        private BooksService _bookService;
 
         public BooksController()
         {
-            _bookService = new BookService();
+            _bookService = new BooksService();
         }
 
-        public async Task<IHttpActionResult> Get()
+        // GET api/books
+        public IHttpActionResult Get()
         {
-            return Ok(await Task.FromResult(_bookService.GetBooks()));
+            return Ok(_bookService.GetBooks().AsEnumerable());
         }
 
-        public async Task<IHttpActionResult> GetBook(int id)
+        // GET api/books/1
+        public IHttpActionResult Get(int id)
         {
-            return Ok(await Task.FromResult(_bookService.GetBook(id)));
+            var book = _bookService.GetBook(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(book);
         }
 
-        // POST: api/Books
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult PostBook(Book book)
+        // PUT api/books/1
+        public IHttpActionResult Put(int id, Book book)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _bookService.AddBook(book);
-            return Ok(book);
+            return Ok(_bookService.UpdateBook(book));
         }
+
+        // POST api/books
+        public IHttpActionResult Post(Book book)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Book newBook = _bookService.AddBook(book);
+            return CreatedAtRoute("DefaultApi", new { newBook.Id }, newBook);
+        }
+
     }
 }

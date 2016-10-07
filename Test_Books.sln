@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.Web", "Books.Web\Books.Web.csproj", "{0563925A-B8AD-4496-8897-9DFDDCEE632C}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.DL", "Books.DL\Books.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.BL", "Books.BL\Books.BL.csproj", "{37D1CA7F-D9AD-4FA0-9ED3-A67B6E292B09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.UnitTestProject", "Books.UnitTestProject\Books.UnitTestProject.csproj", "{229516AE-BF99-4E03-9A20-AF2D9F648E99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books.UnitTests", "Books.UnitTestProject\Books.UnitTests.csproj", "{229516AE-BF99-4E03-9A20-AF2D9F648E99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

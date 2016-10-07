@@ -8,53 +8,55 @@ namespace Books.DL
 {
     public class BooksRepository : IDisposable
     {
-        private BookContext ctx;
+        private BooksContext _bookContext;
 
         public BooksRepository()
         {
-            ctx = new BookContext();
+            _bookContext = new BooksContext();
         }
 
-        public void AddBook(Book book)
+        public IEnumerable<Book> GetBooks()
+        {
+            return _bookContext.Books.AsEnumerable();
+        }
+
+        public Book GetBook(int id)
+        {
+            return _bookContext.Books.FirstOrDefault(book => book.Id == id);
+        }
+
+        public Book AddBook(Book book)
         {
             if (book != null)
             {
-                ctx.Books.Add(book);
+                return _bookContext.Books.Add(book);
             }
+            else
+                return null;
         }
 
         public void UpdateBook(Book book)
         {
-            ctx.Books.Attach(book);
-            ctx.Entry(book).State = EntityState.Modified;
+            _bookContext.Books.Attach(book);
+            _bookContext.Entry(book).State = EntityState.Modified;
         }
 
         public void RemoveBook(Book book)
         {
             if (book != null)
             {
-                ctx.Books.Remove(book);
+                _bookContext.Books.Remove(book);
             }
         }
-
-        public IEnumerable<Book> GetBooks()
-        {
-            return ctx.Books;
-        }
-
-        public Book GetBook(int id)
-        {
-            return ctx.Books.FirstOrDefault(book => book.Id == id);
-        }
-
+        
         public void Save()
         {
-            ctx.SaveChanges();
+            _bookContext.SaveChanges();
         }
 
         public void Dispose()
         {
-            ctx.Dispose();
+            _bookContext.Dispose();
         }
     }
 }

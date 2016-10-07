@@ -1,74 +1,122 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Books.Web;
 using Books.Controllers;
+using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Results;
+using System.Net;
+using System.Data.Entity;
+using Books;
 using Books.Models;
+using Books.DL;
+using Books.BL;
+using Books.Web;
+using System.Diagnostics;
 
-namespace Books.UnitTestProject
+namespace Books.UnitTests
 {
     [TestClass]
-    public class TestSimpleBooksController
+    public class TestBooksController
     {
-        [TestMethod]
-        public void GetAllBooks_ShouldReturnAllBooks()
+        [TestInitialize]
+        public void TestInitialize()
         {
-            var testBooks = GetTestProducts();
-            var controller = new BooksController(testBooks);
-
-            var result = controller.Get() as await Task<IEnumerabke<Book>>;
-            Assert.AreEqual(testProducts.Count, result.Count);
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Books.Web\App_Data"));
+            var p = AppDomain.CurrentDomain.GetData("DataDirectory");
+            Debug.WriteLine(p);
+            // rest of initialize implementation ...
         }
 
         [TestMethod]
-        public async Task GetAllProductsAsync_ShouldReturnAllProducts()
+        public void GetShouldReturnAllBooks()
         {
-            var testProducts = GetTestProducts();
-            var controller = new SimpleProductController(testProducts);
-
-            var result = await controller.GetAllProductsAsync() as List<Product>;
-            Assert.AreEqual(testProducts.Count, result.Count);
+            var controller = new BooksController();
+            var actionResult = controller.Get();
+            var response = actionResult as OkNegotiatedContentResult<IEnumerable<Book>>;
+            Assert.IsNotNull(response);
+            var books = response.Content;
+            Assert.AreEqual(1, books);
         }
 
         [TestMethod]
-        public void GetProduct_ShouldReturnCorrectProduct()
+        public void GetWithIdItShouldReturnThatBook()
         {
-            var testProducts = GetTestProducts();
-            var controller = new SimpleProductController(testProducts);
-
-            var result = controller.GetProduct(4) as OkNegotiatedContentResult<Product>;
-            Assert.IsNotNull(result);
-            Assert.AreEqual(testProducts[3].Name, result.Content.Name);
+            var controller = new BooksController();
+            var actionResult = controller.Get(1);
+            var response = actionResult as OkNegotiatedContentResult<Book>;
+            Assert.IsNotNull(response);
+            Assert.AreEqual(1, response.Content.Id);
         }
 
         [TestMethod]
-        public async Task GetProductAsync_ShouldReturnCorrectProduct()
+        public void PutShouldUpdateBook()
         {
-            var testProducts = GetTestProducts();
-            var controller = new SimpleProductController(testProducts);
-
-            var result = await controller.GetProductAsync(4) as OkNegotiatedContentResult<Product>;
-            Assert.IsNotNull(result);
-            Assert.AreEqual(testProducts[3].Name, result.Content.Name);
+            var controller = new BooksController();
+            var book = new Book { Id = 1, Title = "asp.net webapi2", Author = "Jane Austen" };
+            var actionResult = controller.Put(book.Id, book);
+            var response = actionResult as OkNegotiatedContentResult<Book>;
+            Assert.IsNotNull(response);
+            var newBook = response.Content;
+            Assert.AreEqual(1, newBook.Id);
+            Assert.AreEqual("asp.net webapi2", newBook.Title);
+            Assert.AreEqual("Jane Austen", newBook.Author);
         }
 
         [TestMethod]
-        public void GetProduct_ShouldNotFindProduct()
+        public void PostShouldAddBook()
         {
-            var controller = new SimpleProductController(GetTestProducts());
-
-            var result = controller.GetProduct(999);
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            var controller = new BooksController();
+            var actionResult = controller.Post(new Book
+            {
+                Title = "asp.net webapi2",
+                Author = "Jane Austen"
+            });
+            var response = actionResult as CreatedAtRouteNegotiatedContentResult<Book>;
+            Assert.IsNotNull(response);
+            Assert.AreEqual("DefaultApi", response.RouteName);
+            Assert.AreEqual(response.Content.Id, response.RouteValues["Id"]);
         }
 
-        private List<Product> GetTestProducts()
+        public List<Book> GetTestBooks()
         {
-            var testProducts = new List<Product>();
-            testProducts.Add(new Product { Id = 1, Name = "Demo1", Price = 1 });
-            testProducts.Add(new Product { Id = 2, Name = "Demo2", Price = 3.75M });
-            testProducts.Add(new Product { Id = 3, Name = "Demo3", Price = 16.99M });
-            testProducts.Add(new Product { Id = 4, Name = "Demo4", Price = 11.00M });
-
-            return testProducts;
+            var testBooks = new List<Book>();
+            testBooks.Add(new Book
+            {
+                Id = 1,
+                Title = "Pride and Prejudice",
+                Year = 1813,
+                Author = "Jane Austen",
+                Price = 9.99M,
+                Genre = "Commedy of manners"
+            });
+            testBooks.Add(new Book
+            {
+                Id = 2,
+                Title = "Northanger Abbey",
+                Year = 1817,
+                Author = "Jane Austen",
+                Price = 12.95M,
+                Genre = "Gothic parody"
+            });
+            testBooks.Add(new Book
+            {
+                Id = 3,
+                Title = "David Copperfield",
+                Year = 1850,
+                Author = "Charles Dickens",
+                Price = 15,
+            });
+            testBooks.Add(new Book
+            {
+                Id = 4,
+                Title = "Don Quixote",
+                Year = 1617,
+                Author = "Miguel de Cervantes",
+                Price = 8.95M,
+                Genre = "Picaresque"
+            });
+            return testBooks;
         }
+
     }
 }

@@ -4,14 +4,14 @@ namespace Books.Web.Migrations
     using Models;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BookContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BooksContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(BookContext context)
+        protected override void Seed(BooksContext context)
         {
             context.Books.AddOrUpdate(x => x.Id,
                 new Book()
